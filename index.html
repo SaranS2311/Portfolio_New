@@ -127,24 +127,15 @@
 
     /* Updated Square Profile Container */
     .profile-img-container {
-      width: 280px; /* Increased size */
-      height: 280px; /* Increased size */
-      border-radius: 24px; /* Slightly rounded square */
+      width: 280px; 
+      height: 280px; 
+      border-radius: 24px; 
       border: 2px solid rgba(34, 211, 238, 0.5);
       margin-bottom: 30px;
       overflow: hidden;
       box-shadow: var(--neon-shadow);
       background: #0f172a;
       position: relative;
-    }
-
-    .profile-img-container::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        border: 1px solid rgba(255,255,255,0.1);
-        pointer-events: none;
-        border-radius: 24px;
     }
 
     .profile-img-container img {
@@ -311,6 +302,22 @@
       text-align: left;
     }
 
+    /* Form Styles */
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .form-label {
+      display: block;
+      color: var(--accent-cyan);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
     .message-input {
       width: 100%;
       background: rgba(15, 23, 42, 0.6);
@@ -322,6 +329,11 @@
       resize: none;
       transition: 0.3s;
       outline: none;
+    }
+
+    .message-input:focus {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 10px rgba(34, 211, 238, 0.2);
     }
 
     .contact-grid {
@@ -381,6 +393,15 @@
         gap: 5px;
     }
 
+    /* Status for AJAX message */
+    #form-status {
+      display: none;
+      margin-bottom: 20px;
+      padding: 10px;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+
     @media (max-width: 992px) {
       .contact-grid { grid-template-columns: 1fr 1fr; }
     }
@@ -400,28 +421,25 @@
 <body>
 
   <div id="canvas-container"></div>
-  
-  <!-- Floating Background Icons -->
   <div class="floating-icons" id="floating-icons"></div>
 
   <div id="copy-toast" style="position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); background: var(--accent-cyan); color: #000; padding: 10px 20px; border-radius: 50px; font-weight: bold; display: none; z-index: 9999;">Email copied to clipboard!</div>
 
   <header id="header">
-  <nav class="nav-menu">
-    <ul>
-      <li><a href="#hero"><i class="bx bx-home"></i></a></li>
-      <li><a href="#about"><i class="bx bx-user"></i></a></li>
-      <li><a href="#portfolio"><i class="bx bx-grid-alt"></i></a></li>
-      <li><a href="#contact"><i class="bx bx-envelope"></i></a></li>
-    </ul>
-  </nav>
-</header>
+    <nav class="nav-menu">
+      <ul>
+        <li><a href="#hero"><i class="bx bx-home"></i></a></li>
+        <li><a href="#about"><i class="bx bx-user"></i></a></li>
+        <li><a href="#portfolio"><i class="bx bx-grid-alt"></i></a></li>
+        <li><a href="#contact"><i class="bx bx-envelope"></i></a></li>
+      </ul>
+    </nav>
+  </header>
 
   <section id="hero">
     <div class="hero-content" data-aos="fade-up">
       <div class="profile-img-container">
-        <!-- Kept as .jpg as per preference -->
-        <img src="image_b6a6df.jpg.jpg" alt="Saran Senthil Kumaran">
+        <img src="image_aad51b.jpg" alt="Saran Senthil Kumaran">
       </div>
       <h1>Saran Senthil Kumaran</h1>
       <h2>
@@ -566,15 +584,40 @@
             <div class="contact-cta-text">
               I am a highly motivated <strong>MSc Business Analytics graduate</strong> eager to apply my analytical mindset in a forward-thinking team. Send me a quick note below!
             </div>
-            
-            <div class="message-box-container mb-4">
-              <textarea id="userMessage" class="message-input" rows="4" placeholder="Enter your message here... I'm looking forward to connecting with you!"></textarea>
-            </div>
 
-            <div class="d-flex gap-3 mb-5 justify-content-center">
-              <button onclick="sendEmailWithMsg()" class="btn-cyber">Send Message</button>
-              <a href="https://linkedin.com/in/saran-senthil-kumaran" target="_blank" class="btn-cyber">LinkedIn Profile</a>
-            </div>
+            <div id="form-status"></div>
+
+            <form id="ajax-contact-form" action="https://formspree.io/f/xvzwljzj" method="POST">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="userName" class="form-label">Name</label>
+                    <input type="text" id="userName" name="name" class="message-input" placeholder="Your Name" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="userEmail" class="form-label">Email Address</label>
+                    <input type="email" id="userEmail" name="email" class="message-input" placeholder="Your Email" required>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="userSubject" class="form-label">Subject</label>
+                <input type="text" id="userSubject" name="subject" class="message-input" placeholder="Reason for contact" required>
+              </div>
+
+              <div class="form-group">
+                <label for="userMessage" class="form-label">Transmission Data</label>
+                <textarea id="userMessage" name="message" class="message-input" rows="4" placeholder="Enter your message here... I'm looking forward to connecting with you!" required></textarea>
+              </div>
+
+              <div class="d-flex gap-3 mt-4 mb-5 justify-content-center">
+                <button type="submit" id="submit-btn" class="btn-cyber">Send Message</button>
+                <a href="https://linkedin.com/in/saran-senthil-kumaran" target="_blank" class="btn-cyber">LinkedIn Profile</a>
+              </div>
+            </form>
           </div>
         </div>
 
@@ -601,7 +644,6 @@
     </section>
   </main>
 
-  <!-- Original Design Footer -->
   <footer class="py-5 text-center text-white-50">
     <p>© 2026 Saran Senthil Kumaran. All Rights Reserved.</p>
   </footer>
@@ -703,14 +745,45 @@
       setTimeout(() => toast.style.display = 'none', 2000);
     }
 
-    function sendEmailWithMsg() {
-      const msg = document.getElementById('userMessage').value;
-      const emailRecipient = 'ssaran45008@gmail.com';
-      const subject = encodeURIComponent('Inquiry from Portfolio Website - Saran Senthil Kumaran');
-      const defaultBody = "Hi Saran,\n\nI visited your portfolio and would like to get in touch with you regarding professional opportunities.";
-      const body = encodeURIComponent(msg || defaultBody);
-      window.location.href = `mailto:${emailRecipient}?subject=${subject}&body=${body}`;
-    }
+    // Modern AJAX Contact Handling
+    const contactForm = document.getElementById("ajax-contact-form");
+    const statusDiv = document.getElementById("form-status");
+    const submitBtn = document.getElementById("submit-btn");
+
+    contactForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      
+      const formData = new FormData(contactForm);
+      
+      submitBtn.disabled = true;
+      submitBtn.innerText = "Transmitting...";
+      statusDiv.style.display = "block";
+      statusDiv.innerText = "Sending your message to Saran...";
+      statusDiv.style.color = "var(--accent-cyan)";
+
+      try {
+        const response = await fetch(contactForm.action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          statusDiv.innerText = "Message transmitted successfully! Saran will get back to you soon.";
+          statusDiv.style.color = "#22c55e"; 
+          contactForm.reset();
+        } else {
+          statusDiv.innerText = "An error occurred. Please try again or contact me directly via LinkedIn.";
+          statusDiv.style.color = "#ef4444";
+        }
+      } catch (err) {
+        statusDiv.innerText = "Transmission failed. Please check your internet connection.";
+        statusDiv.style.color = "#ef4444";
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Send Message";
+      }
+    });
 
     window.addEventListener('resize', () => {
       camera.aspect = window.innerWidth / window.innerHeight;
@@ -718,8 +791,7 @@
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
-    window.onload = init;
-    AOS.init({ duration: 1000, once: true });
+    window.onload = () => { init(); AOS.init({ duration: 1000, once: true }); };
   </script>
 </body>
 </html>
