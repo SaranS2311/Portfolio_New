@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Saran Senthil Kumaran | Business Analyst Portfolio</title>
+  <title>Saran Senthil Kumaran | Analyst Portfolio</title>
   
   <!-- Vendor CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
@@ -30,7 +30,6 @@
       scroll-behavior: smooth;
     }
 
-    /* Original Space/Data Background */
     #canvas-container {
       position: fixed;
       top: 0;
@@ -42,7 +41,6 @@
                   url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=2072') center/cover no-repeat;
     }
 
-    /* Floating Icons Animation */
     .floating-icons {
       position: fixed;
       top: 0;
@@ -125,7 +123,6 @@
       gap: 10px;
     }
 
-    /* Updated Square Profile Container */
     .profile-img-container {
       width: 280px; 
       height: 280px; 
@@ -232,6 +229,89 @@
       background: linear-gradient(90deg, var(--accent-cyan), transparent);
     }
 
+    /* Pathway / Timeline Styling */
+    .pathway-container {
+      position: relative;
+      padding: 20px 0;
+    }
+
+    .pathway-line {
+      position: absolute;
+      left: 30px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--accent-blue), var(--accent-cyan), transparent);
+    }
+
+    .pathway-item {
+      position: relative;
+      padding-left: 80px;
+      margin-bottom: 50px;
+    }
+
+    /* Standard Completed Node */
+    .pathway-node {
+      position: absolute;
+      left: 19px;
+      top: 5px;
+      width: 24px;
+      height: 24px;
+      background: var(--accent-cyan);
+      border: 3px solid var(--bg-dark);
+      border-radius: 50%;
+      z-index: 2;
+    }
+
+    /* Active Pulsing Node for Future Steps */
+    .pathway-node.active-node {
+      background: var(--bg-dark);
+      border: 3px solid var(--accent-blue);
+    }
+
+    .pathway-node.active-node::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 10px;
+      height: 10px;
+      background: var(--accent-blue);
+      border-radius: 50%;
+      animation: nodePulse 2s infinite;
+    }
+
+    @keyframes nodePulse {
+      0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+      100% { transform: translate(-50%, -50%) scale(3); opacity: 0; }
+    }
+
+    .pathway-card {
+      background: var(--glass);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 25px;
+      transition: 0.3s;
+      position: relative;
+    }
+
+    .pathway-card::before {
+      content: "";
+      position: absolute;
+      left: -15px;
+      top: 15px;
+      width: 15px;
+      height: 2px;
+      background: rgba(34, 211, 238, 0.5);
+    }
+
+    .pathway-card:hover {
+      border-color: var(--accent-cyan);
+      transform: translateX(10px);
+      box-shadow: var(--neon-shadow);
+    }
+
     .skills-container {
       display: flex;
       flex-wrap: wrap;
@@ -302,7 +382,6 @@
       text-align: left;
     }
 
-    /* Form Styles */
     .form-group {
       margin-bottom: 20px;
       text-align: left;
@@ -385,15 +464,38 @@
     }
 
     .timeline-date {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
         color: var(--accent-cyan);
         margin-bottom: 10px;
         display: flex;
         align-items: center;
         gap: 5px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
     }
 
-    /* Status for AJAX message */
+    .experience-list {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 15px;
+    }
+
+    .experience-list li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 8px;
+      color: #cbd5e1;
+      font-size: 0.95rem;
+    }
+
+    .experience-list li::before {
+      content: "▹";
+      position: absolute;
+      left: 0;
+      color: var(--accent-cyan);
+    }
+
     #form-status {
       display: none;
       margin-bottom: 20px;
@@ -414,10 +516,12 @@
       .contact-info-list { justify-content: center; }
       .contact-card { padding: 40px 20px; }
       .contact-grid { grid-template-columns: 1fr; }
+      .pathway-item { padding-left: 50px; }
+      .pathway-line { left: 15px; }
+      .pathway-node { left: 4px; }
     }
   </style>
 </head>
-
 <body>
 
   <div id="canvas-container"></div>
@@ -425,11 +529,12 @@
 
   <div id="copy-toast" style="position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); background: var(--accent-cyan); color: #000; padding: 10px 20px; border-radius: 50px; font-weight: bold; display: none; z-index: 9999;">Email copied to clipboard!</div>
 
-  <header id="header">
+   <header id="header">
     <nav class="nav-menu">
       <ul>
         <li><a href="#hero"><i class="bx bx-home"></i></a></li>
         <li><a href="#about"><i class="bx bx-user"></i></a></li>
+        <li><a href="#experience"><i class="bx bx-history"></i></a></li>
         <li><a href="#portfolio"><i class="bx bx-grid-alt"></i></a></li>
         <li><a href="#contact"><i class="bx bx-envelope"></i></a></li>
       </ul>
@@ -489,6 +594,67 @@
         </div>
       </div>
     </section>
+
+<!-- Professional Pathway -->
+    <section id="experience">
+      <h3 class="section-title"><i class="bx bx-git-branch"></i> PROFESSIONAL_PATHWAY</h3>
+      
+      <div class="pathway-container">
+        <div class="pathway-line"></div>
+
+        <!-- Next Step / Target (Active/Pulsing) -->
+        <div class="pathway-item" data-aos="fade-right">
+          <div class="pathway-node active-node"></div>
+          <div class="pathway-card" style="border-style: dashed; border-color: var(--accent-blue);">
+            <div class="timeline-date" style="color: var(--accent-blue);"><i class="bx bx-rocket"></i> TARGET_PATH</div>
+            <h4 class="text-white">Seeking Analyst Roles</h4>
+            <p class="text-muted m-0">Ready to leverage MSc insights and technical expertise to solve complex business problems in the UK market.</p>
+          </div>
+        </div>
+
+        <!-- Job 1 -->
+        <div class="pathway-item" data-aos="fade-right" data-aos-delay="200">
+          <div class="pathway-node"></div>
+          <div class="pathway-card">
+            <div class="timeline-date"><i class="bx bx-check-circle"></i> COMPLETED | MARCH 2026</div>
+            <h4 class="text-white">Data Visualizations Virtual Experience</h4>
+            <h5 class="text-info mb-3">Tata Group (Forage Job Simulation)</h5>
+            <ul class="experience-list">
+              <li>Completed a data visualization simulation for Tata Consultancy Services.</li>
+              <li>Created visual dashboards to support executive decision-making.</li>
+              <li>Analysed business data and presented insights using Power BI and Tableau.</li>
+              <li>Prepared questions and insights for a simulated client leadership meeting.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Job 2 -->
+        <div class="pathway-item" data-aos="fade-right" data-aos-delay="400">
+          <div class="pathway-node"></div>
+          <div class="pathway-card">
+            <div class="timeline-date"><i class="bx bx-check-circle"></i> COMPLETED | JUL 2023 - OCT 2023</div>
+            <h4 class="text-white">Power BI & SQL Data Analytics Trainee</h4>
+            <h5 class="text-info mb-3">FITA Academy | Chennai, India</h5>
+            <div class="row">
+              <div class="col-md-6">
+                <ul class="experience-list">
+                  <li>Completed hands-on training in Power BI Desktop and SQL.</li>
+                  <li>Used SQL for filtering, joins, subqueries, and CTEs.</li>
+                </ul>
+              </div>
+              <div class="col-md-6">
+                <ul class="experience-list">
+                  <li>Built interactive Power BI reports and dashboards.</li>
+                  <li>Developed DAX measures to support enhanced analysis.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
 
     <section id="portfolio">
       <h3 class="section-title"><i class="bx bx-briefcase-alt-2"></i> PROJECT_PORTFOLIO</h3>
@@ -556,7 +722,7 @@
         <!-- Project 5 -->
         <div class="col-md-6" data-aos="zoom-in" data-aos-delay="100">
           <div class="cyber-card h-100">
-            <img src="ChatGPT Image Mar 5, 2026, 07_09_52 PM.png" class="project-img" alt="Face Mask Detection">
+            <img src="ChatGPT Image Mar 5, 2026, 07_09_52 PM.png" class="project-img" alt="BrickBreaker_Game">
             <div class="card-content">
               <div class="timeline-date"><i class="bx bx-calendar"></i> NOV 2022 – DEC 2022</div>
               <h4>BrickBreaker_Game</h4>
