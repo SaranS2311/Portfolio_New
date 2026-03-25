@@ -207,6 +207,17 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
+    .project-img-placeholder {
+      width: 100%;
+      height: 220px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 10px;
+    }
+
     .section-title {
       color: var(--accent-cyan);
       font-weight: 700;
@@ -229,7 +240,6 @@
       background: linear-gradient(90deg, var(--accent-cyan), transparent);
     }
 
-    /* Pathway / Timeline Styling */
     .pathway-container {
       position: relative;
       padding: 20px 0;
@@ -250,7 +260,6 @@
       margin-bottom: 50px;
     }
 
-    /* Standard Completed Node */
     .pathway-node {
       position: absolute;
       left: 19px;
@@ -263,7 +272,6 @@
       z-index: 2;
     }
 
-    /* Active Pulsing Node for Future Steps */
     .pathway-node.active-node {
       background: var(--bg-dark);
       border: 3px solid var(--accent-blue);
@@ -595,20 +603,20 @@
       </div>
     </section>
 
-<!-- Professional Pathway -->
+    <!-- Professional Pathway -->
     <section id="experience">
       <h3 class="section-title"><i class="bx bx-git-branch"></i> PROFESSIONAL_PATHWAY</h3>
       
       <div class="pathway-container">
         <div class="pathway-line"></div>
 
-        <!-- Next Step / Target (Active/Pulsing) -->
+           <!-- Next Step / Target (Active/Pulsing) -->
         <div class="pathway-item" data-aos="fade-right">
           <div class="pathway-node active-node"></div>
-          <div class="pathway-card" style="border-style: dashed; border-color: var(--accent-blue);">
-            <div class="timeline-date" style="color: var(--accent-blue);"><i class="bx bx-rocket"></i> TARGET_PATH</div>
-            <h4 class="text-white">Seeking Analyst Roles</h4>
-            <p class="text-muted m-0">Ready to leverage MSc insights and technical expertise to solve complex business problems in the UK market.</p>
+          <div class="pathway-card" style="border-style: solid; border-color: var(--accent-blue); background: rgba(59, 130, 246, 0.1);">
+            <div class="timeline-date" style="color: #fff; background: var(--accent-blue); padding: 2px 10px; border-radius: 4px; display: inline-flex;"><i class="bx bx-rocket" style="margin-right: 5px;"></i> TARGET_PATH</div>
+            <h4 class="text-white mt-2">Seeking Analyst Roles</h4>
+            <p style="color: #f8fafc; font-weight: 500; font-size: 1.05rem; margin: 0; line-height: 1.5;">Ready to leverage MSc insights and technical expertise to solve complex business problems in the UK market.</p>
           </div>
         </div>
 
@@ -655,11 +663,48 @@
       </div>
     </section>
 
-
+    <!-- Sorted Project Portfolio (Most Recent First) -->
     <section id="portfolio">
       <h3 class="section-title"><i class="bx bx-briefcase-alt-2"></i> PROJECT_PORTFOLIO</h3>
       <div class="row g-4">
-        <!-- Project 1 -->
+
+        <!-- 1. Tata Virtual Experience (March 2026) -->
+        <div class="col-md-6" data-aos="zoom-in">
+          <div class="cyber-card h-100">
+            <div class="project-img-placeholder" style="background: linear-gradient(135deg, #0f172a, #1a1040);">
+              <i class="bx bx-analyse" style="font-size:4rem; color:var(--accent-cyan); opacity:0.7;"></i>
+              <span style="color:#94a3b8; font-size:0.8rem; letter-spacing:1px;">TATA × FORAGE</span>
+            </div>
+            <div class="card-content">
+              <div class="timeline-date"><i class="bx bx-calendar"></i> MARCH 2026</div>
+              <h4>Tata Data Visualisation</h4>
+              <p>Completed Tata Group's Forage job simulation — analysed online retail data, selected effective chart types and built Power BI dashboards presenting strategic insights to a simulated CEO and CMO.</p>
+              <a href="https://github.com/SaranS2311/tata-data-visualisation" target="_blank" class="github-link">
+                <i class="bx bxl-github"></i> View Repository
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Sales Dashboard 2026 (Jan 2024 – Dec 2026) -->
+        <div class="col-md-6" data-aos="zoom-in" data-aos-delay="100">
+          <div class="cyber-card h-100">
+            <div class="project-img-placeholder" style="background: linear-gradient(135deg, #0f172a, #0c2340);">
+                <i class="bx bx-bar-chart-alt-2" style="font-size:4rem; color:var(--accent-cyan); opacity:0.7;"></i>
+                <span style="color:#94a3b8; font-size:0.8rem; letter-spacing:1px;">SALES DASHBOARD</span>
+            </div>
+            <div class="card-content">
+              <div class="timeline-date"><i class="bx bx-calendar"></i> JAN 2024 – DEC 2026</div>
+              <h4>Sales Dashboard 2026</h4>
+              <p>Built an interactive Power BI dashboard analysing 100 orders, 12 customers and $102K in revenue across 4 countries — visualising product trends, category splits and quarterly growth.</p>
+              <a href="https://github.com/SaranS2311/sales-dashboard-powerbi" target="_blank" class="github-link">
+                <i class="bx bxl-github"></i> View Repository
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. NHS Energy Analysis (Mar 2025 – Nov 2025) -->
         <div class="col-md-6" data-aos="zoom-in">
           <div class="cyber-card h-100">
             <img src="imagesenergy-project.png" class="project-img" alt="Energy Analysis">
@@ -674,7 +719,7 @@
           </div>
         </div>
 
-        <!-- Project 2 -->
+        <!-- 4. Vehicle Speed Detection (Mar 2023 – Apr 2023) -->
         <div class="col-md-6" data-aos="zoom-in" data-aos-delay="100">
           <div class="cyber-card h-100">
             <img src="ChatGPT Image Mar 5, 2026, 06_53_48 PM.png" class="project-img" alt="Speed Detection">
@@ -689,7 +734,7 @@
           </div>
         </div>
 
-        <!-- Project 3 -->
+        <!-- 5. Facial Recognition System (Mar 2023 – Apr 2023) -->
         <div class="col-md-6" data-aos="zoom-in">
           <div class="cyber-card h-100">
             <img src="ChatGPT Image Mar 5, 2026, 06_45_01 PM.png" class="project-img" alt="Facial Recognition">
@@ -704,7 +749,7 @@
           </div>
         </div>
 
-        <!-- Project 4 -->
+        <!-- 6. Face Mask Detection (Nov 2022 – Dec 2022) -->
         <div class="col-md-6" data-aos="zoom-in" data-aos-delay="100">
           <div class="cyber-card h-100">
             <img src="ChatGPT Image Mar 5, 2026, 07_02_36 PM.png" class="project-img" alt="Face Mask Detection">
@@ -719,8 +764,8 @@
           </div>
         </div>
 
-        <!-- Project 5 -->
-        <div class="col-md-6" data-aos="zoom-in" data-aos-delay="100">
+        <!-- 7. BrickBreaker Game (Nov 2022 – Dec 2022) -->
+        <div class="col-md-6" data-aos="zoom-in" data-aos-delay="200">
           <div class="cyber-card h-100">
             <img src="ChatGPT Image Mar 5, 2026, 07_09_52 PM.png" class="project-img" alt="BrickBreaker_Game">
             <div class="card-content">
@@ -733,6 +778,7 @@
             </div>
           </div>
         </div>
+
       </div>
     </section>
 
@@ -814,14 +860,12 @@
     <p>© 2026 Saran Senthil Kumaran. All Rights Reserved.</p>
   </footer>
 
-  <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 
   <script>
     let scene, camera, renderer, stars, starGeo;
 
-    // SCROLL SPY LOGIC
     window.addEventListener('scroll', () => {
       const sections = document.querySelectorAll('section');
       const navLinks = document.querySelectorAll('.nav-menu a');
@@ -911,16 +955,13 @@
       setTimeout(() => toast.style.display = 'none', 2000);
     }
 
-    // Modern AJAX Contact Handling
     const contactForm = document.getElementById("ajax-contact-form");
     const statusDiv = document.getElementById("form-status");
     const submitBtn = document.getElementById("submit-btn");
 
     contactForm.addEventListener("submit", async (e) => {
       e.preventDefault();
-      
       const formData = new FormData(contactForm);
-      
       submitBtn.disabled = true;
       submitBtn.innerText = "Transmitting...";
       statusDiv.style.display = "block";
@@ -933,7 +974,6 @@
           body: formData,
           headers: { 'Accept': 'application/json' }
         });
-
         if (response.ok) {
           statusDiv.innerText = "Message transmitted successfully! Saran will get back to you soon.";
           statusDiv.style.color = "#22c55e"; 
